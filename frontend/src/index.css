@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  @apply bg-slate-100 dark:bg-slate-900 transition-colors duration-200;
+}
+
+.sidebar-link {
+  @apply flex items-center gap-3 px-4 py-3 rounded-lg text-white/60 hover:bg-white/10 hover:text-white transition-all duration-200;
+}
+.sidebar-link.active {
+  @apply bg-white/20 text-white;
+}
+
+.card {
+  @apply bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700 p-6 transition-colors;
+}
+
+.btn-primary {
+  @apply bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg font-medium transition-colors;
+}
+.btn-secondary {
+  @apply bg-slate-100 hover:bg-slate-200 dark:bg-slate-700 dark:hover:bg-slate-600 dark:text-slate-200 text-slate-700 px-4 py-2 rounded-lg font-medium transition-colors;
+}
+.btn-danger {
+  @apply bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-medium transition-colors;
+}
+.btn-success {
+  @apply bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg font-medium transition-colors;
+}
+
+.input {
+  @apply w-full border border-slate-200 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 dark:placeholder-slate-400 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors;
+}
+.label {
+  @apply block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1;
+}
+
+.badge-present { @apply bg-green-100 text-green-700 px-2 py-0.5 rounded-full text-xs font-medium; }
+.badge-absent  { @apply bg-red-100 text-red-700 px-2 py-0.5 rounded-full text-xs font-medium; }
+.badge-half    { @apply bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded-full text-xs font-medium; }
+
+/* Dark mode overrides */
+.dark .card { background-color: #1e293b; border-color: #334155; }
+.dark body { background-color: #0f172a; }
