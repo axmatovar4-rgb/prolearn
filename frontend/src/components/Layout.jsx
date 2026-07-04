@@ -26,7 +26,6 @@ export default function Layout() {
     fetchNotifs();
     fetchPending();
     const interval = setInterval(() => { fetchNotifs(); fetchPending(); }, 30000);
-    // So'rovlar o'qilganda yangilash
     const onRequestsRead = () => { fetchNotifs(); fetchPending(); };
     window.addEventListener('requests-read', onRequestsRead);
     return () => {
@@ -79,7 +78,7 @@ export default function Layout() {
               className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}>
               <Icon d={item.d} />
               {item.label}
-              {item.badge > 0 && <span className="ml-auto bg-red-500 text-white text-xs px-1.5 py-0.5 rounded-full">{item.badge}</span>}
+              {item.badge > 0 && <span className="ml-auto bg-rose-500 text-white text-xs px-1.5 py-0.5 rounded-full">{item.badge}</span>}
             </NavLink>
           ))}
         </>
@@ -104,27 +103,27 @@ export default function Layout() {
 
   return (
     <div className="flex h-screen overflow-hidden">
-      {/* Mobil overlay */}
       {sidebarOpen && (
         <div className="fixed inset-0 bg-black/50 z-30 lg:hidden" onClick={() => setSidebarOpen(false)} />
       )}
 
-      {/* Sidebar */}
       <aside className={`
         fixed lg:static inset-y-0 left-0 z-40
-        w-64 bg-gradient-to-b from-indigo-900 to-purple-900
+        w-64 bg-gradient-to-b from-slate-950 via-slate-900 to-cyan-950
         flex flex-col flex-shrink-0
         transform transition-transform duration-300 ease-in-out
         ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
       `}>
         <div className="p-5 border-b border-white/10 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="bg-white/20 p-2 rounded-xl">
-              <Icon d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+            <div className="bg-white/15 p-2.5 rounded-2xl shadow-lg shadow-cyan-900/30">
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 text-cyan-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+              </svg>
             </div>
             <div>
-              <h1 className="text-white font-bold text-sm">ProLearn</h1>
-              <p className="text-white/50 text-xs">{isAdmin ? 'Administrator' : user?.username}</p>
+              <h1 className="text-white font-semibold text-sm">Kiro</h1>
+              <p className="text-cyan-200/70 text-[11px]">HR Platform</p>
             </div>
           </div>
           <button onClick={() => setSidebarOpen(false)} className="lg:hidden text-white/60 hover:text-white">
@@ -148,48 +147,43 @@ export default function Layout() {
         </div>
       </aside>
 
-      {/* Main */}
       <div className="flex-1 flex flex-col overflow-hidden min-w-0">
-        {/* Top bar */}
-        <header className="bg-white dark:bg-slate-800 border-b border-slate-100 dark:border-slate-700 px-4 py-3 flex items-center gap-3 flex-shrink-0">
-          {/* Mobil burger */}
-          <button onClick={() => setSidebarOpen(true)} className="lg:hidden p-2 text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors">
+        <header className="bg-white/90 dark:bg-slate-800/90 backdrop-blur-xl border-b border-slate-200 dark:border-slate-700 px-4 py-3 flex items-center gap-3 flex-shrink-0">
+          <button onClick={() => setSidebarOpen(true)} className="lg:hidden p-2 text-slate-500 hover:text-cyan-600 hover:bg-cyan-50 rounded-lg transition-colors">
             <Icon d="M4 6h16M4 12h16M4 18h16" />
           </button>
 
           <div className="flex-1" />
 
-          {/* Til */}
-          <div className="flex items-center gap-1 bg-slate-100 dark:bg-slate-700 rounded-lg p-1">
+          <div className="flex items-center gap-1 bg-slate-100 dark:bg-slate-700 rounded-xl p-1">
             {['uz','ru','en'].map(l => (
               <button key={l} onClick={() => setLang(l)}
-                className={`px-2 py-1 rounded-md text-xs font-bold transition-colors ${lang === l ? 'bg-white dark:bg-slate-600 text-indigo-600 shadow-sm' : 'text-slate-500 dark:text-slate-400'}`}>
+                className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-colors ${lang === l ? 'bg-white dark:bg-slate-600 text-cyan-600 shadow-sm' : 'text-slate-500 dark:text-slate-400'}`}>
                 {l.toUpperCase()}
               </button>
             ))}
           </div>
 
-          {/* Bildirishnomalar */}
           <div className="relative">
             <button onClick={() => setShowNotif(!showNotif)}
-              className="relative p-2 text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 dark:hover:bg-slate-700 rounded-lg transition-colors">
+              className="relative p-2 text-slate-500 hover:text-cyan-600 hover:bg-cyan-50 dark:hover:bg-slate-700 rounded-lg transition-colors">
               <Icon d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-              {unread > 0 && <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">{unread > 9 ? '9+' : unread}</span>}
+              {unread > 0 && <span className="absolute -top-1 -right-1 bg-rose-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">{unread > 9 ? '9+' : unread}</span>}
             </button>
             {showNotif && (
-              <div className="absolute right-0 top-10 w-72 sm:w-80 bg-white dark:bg-slate-800 rounded-xl shadow-xl border border-slate-100 dark:border-slate-700 z-50 overflow-hidden">
+              <div className="absolute right-0 top-10 w-72 sm:w-80 bg-white dark:bg-slate-800 rounded-2xl shadow-xl border border-slate-100 dark:border-slate-700 z-50 overflow-hidden">
                 <div className="px-4 py-3 border-b border-slate-100 dark:border-slate-700 flex items-center justify-between">
                   <span className="font-semibold text-slate-700 dark:text-slate-200 text-sm">Bildirishnomalar</span>
-                  {unread > 0 && <button onClick={async () => { await api.patch('/notifications/read-all'); fetchNotifs(); }} className="text-xs text-indigo-500">Barchasini o'qidim</button>}
+                  {unread > 0 && <button onClick={async () => { await api.patch('/notifications/read-all'); fetchNotifs(); }} className="text-xs text-cyan-600">Barchasini o'qidim</button>}
                 </div>
                 <div className="max-h-64 overflow-y-auto">
                   {notifications.length === 0 ? (
                     <p className="text-center text-slate-400 py-6 text-sm">Bildirishnoma yo'q</p>
                   ) : notifications.map(n => (
                     <div key={n.id} onClick={() => markRead(n.id)}
-                      className={`px-4 py-3 border-b border-slate-50 dark:border-slate-700 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors ${!n.is_read ? 'bg-indigo-50 dark:bg-indigo-900/20' : ''}`}>
+                      className={`px-4 py-3 border-b border-slate-50 dark:border-slate-700 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors ${!n.is_read ? 'bg-cyan-50 dark:bg-cyan-900/20' : ''}`}>
                       <div className="flex items-start gap-2">
-                        <span className={`mt-1 w-2 h-2 rounded-full flex-shrink-0 ${!n.is_read ? 'bg-indigo-500' : 'bg-slate-300'}`} />
+                        <span className={`mt-1 w-2 h-2 rounded-full flex-shrink-0 ${!n.is_read ? 'bg-cyan-500' : 'bg-slate-300'}`} />
                         <div>
                           <p className="text-sm font-medium text-slate-700 dark:text-slate-200">{n.title}</p>
                           <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">{n.message}</p>
@@ -202,16 +196,15 @@ export default function Layout() {
             )}
           </div>
 
-          {/* Avatar */}
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-400 to-purple-500 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
+            <div className="w-9 h-9 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white font-semibold text-sm flex-shrink-0 shadow-lg shadow-cyan-500/20">
               {user?.username?.[0]?.toUpperCase()}
             </div>
             <span className="text-sm font-medium text-slate-700 dark:text-slate-200 hidden md:block">{user?.username}</span>
           </div>
         </header>
 
-        <main className="flex-1 overflow-y-auto bg-slate-50 dark:bg-slate-900 transition-colors">
+        <main className="flex-1 overflow-y-auto bg-[radial-gradient(circle_at_top_left,_rgba(34,211,238,0.10),_transparent_35%),linear-gradient(135deg,_#f8fbff_0%,_#f8fafc_100%)] dark:bg-slate-950 transition-colors">
           <Outlet />
         </main>
       </div>

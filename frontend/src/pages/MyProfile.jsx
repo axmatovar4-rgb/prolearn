@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import api from '../api';
 import toast from 'react-hot-toast';
+import { HiPhone, HiMapPin, HiCake, HiCalendarDays, HiCreditCard, HiCamera, HiChartBar, HiCalendar, HiCurrencyDollar, HiStar } from 'react-icons/hi2';
 
 const getUser = () => { try { return JSON.parse(localStorage.getItem('user')); } catch { return null; } };
 const fmt = n => new Intl.NumberFormat('uz-UZ').format(Math.round(n || 0));
@@ -104,7 +105,7 @@ export default function MyProfile() {
             {editMode && (
               <button onClick={() => fileRef.current?.click()}
                 className="absolute -bottom-1 -right-1 bg-white text-indigo-600 p-1.5 rounded-full shadow-md">
-                📷
+                <HiCamera className="w-4 h-4" />
               </button>
             )}
             <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={e => {
@@ -129,11 +130,11 @@ export default function MyProfile() {
                 <h2 className="text-xl font-bold">{emp?.last_name} {emp?.first_name} {emp?.middle_name}</h2>
                 <p className="text-white/70 text-sm mt-0.5">{emp?.position || 'Xodim'} {emp?.department ? `— ${emp.department}` : ''}</p>
                 <div className="flex flex-wrap gap-3 mt-3 text-sm">
-                  {emp?.phone && <span className="text-white/80">📞 {emp.phone}</span>}
-                  {emp?.city && <span className="text-white/80">📍 {emp.city}</span>}
-                  {emp?.birth_date && <span className="text-white/80">🎂 {emp.birth_date}</span>}
-                  {emp?.hire_date && <span className="text-white/80">📅 {emp.hire_date}</span>}
-                  {emp?.card_number && <span className="text-white/80 font-mono">💳 {emp.card_number}</span>}
+                  {emp?.phone && <span className="text-white/80 flex items-center gap-1"><HiPhone className="w-4 h-4" /> {emp.phone}</span>}
+                  {emp?.city && <span className="text-white/80 flex items-center gap-1"><HiMapPin className="w-4 h-4" /> {emp.city}</span>}
+                  {emp?.birth_date && <span className="text-white/80 flex items-center gap-1"><HiCake className="w-4 h-4" /> {emp.birth_date}</span>}
+                  {emp?.hire_date && <span className="text-white/80 flex items-center gap-1"><HiCalendarDays className="w-4 h-4" /> {emp.hire_date}</span>}
+                  {emp?.card_number && <span className="text-white/80 font-mono flex items-center gap-1"><HiCreditCard className="w-4 h-4" /> {emp.card_number}</span>}
                 </div>
               </>
             )}
@@ -142,7 +143,7 @@ export default function MyProfile() {
       </div>
 
       <div className="flex gap-1 bg-slate-100 dark:bg-slate-800 rounded-xl p-1 overflow-x-auto">
-        {[['overview','📊 Umumiy'],['attendance','📅 Davomat'],['salary','💰 Maosh'],['evaluations','⭐ Baholash']].map(([v,l]) => (
+        {[['overview','Umumiy'],['attendance','Davomat'],['salary','Maosh'],['evaluations','Baholash']].map(([v,l]) => (
           <button key={v} onClick={() => setTab(v)}
             className={`flex-1 py-2 rounded-lg text-xs sm:text-sm font-medium transition-colors whitespace-nowrap ${tab===v?'bg-white dark:bg-slate-700 shadow text-indigo-600':'text-slate-500'}`}>
             {l}

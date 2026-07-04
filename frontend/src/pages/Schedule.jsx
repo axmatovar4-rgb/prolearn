@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react';
 import api from '../api';
 import toast from 'react-hot-toast';
+import { HiSun, HiMoon, HiArrowsRightLeft, HiSparkles, HiCheckCircle } from 'react-icons/hi2';
 
 const MONTHS = ['Yanvar','Fevral','Mart','Aprel','May','Iyun','Iyul','Avgust','Sentabr','Oktabr','Noyabr','Dekabr'];
 
 const SHIFTS = {
-  day:   { label: '☀️ Kunduzgi', color: 'bg-yellow-100 text-yellow-700', time: '09:00–18:00' },
-  night: { label: '🌙 Tungi', color: 'bg-indigo-100 text-indigo-700', time: '22:00–06:00' },
-  flex:  { label: '🔄 Erkin', color: 'bg-green-100 text-green-700', time: 'Erkin' },
-  off:   { label: '🏖️ Dam olish', color: 'bg-slate-100 text-slate-500', time: '—' },
+  day:   { label: 'Kunduzgi', color: 'bg-yellow-100 text-yellow-700', time: '09:00–18:00', icon: HiSun },
+  night: { label: 'Tungi', color: 'bg-indigo-100 text-indigo-700', time: '22:00–06:00', icon: HiMoon },
+  flex:  { label: 'Erkin', color: 'bg-green-100 text-green-700', time: 'Erkin', icon: HiArrowsRightLeft },
+  off:   { label: 'Dam olish', color: 'bg-slate-100 text-slate-500', time: '—', icon: HiSparkles },
 };
 
 export default function Schedule() {
@@ -171,8 +172,8 @@ export default function Schedule() {
                         <button
                           onClick={() => toggleShift(emp.id, date)}
                           title={shiftInfo ? shiftInfo.label : 'Belgilanmagan'}
-                          className={`w-8 h-8 rounded text-xs font-bold transition-all hover:opacity-80 ${isChanged ? 'ring-2 ring-indigo-400' : ''} ${shiftInfo ? shiftInfo.color : 'bg-slate-100 text-slate-300'}`}>
-                          {shift === 'day' ? '☀️' : shift === 'night' ? '🌙' : shift === 'flex' ? '🔄' : shift === 'off' ? '🏖️' : '·'}
+                          className={`w-8 h-8 rounded text-xs font-bold transition-all hover:opacity-80 flex items-center justify-center ${isChanged ? 'ring-2 ring-indigo-400' : ''} ${shiftInfo ? shiftInfo.color : 'bg-slate-100 text-slate-300'}`}>
+                          {shiftInfo?.icon ? <shiftInfo.icon className="w-4 h-4" /> : '·'}
                         </button>
                       </td>
                     );

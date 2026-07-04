@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import api from '../api';
 import { useApp } from '../context/AppContext';
+import { HiUsers, HiCheckCircle, HiXCircle, HiCurrencyDollar } from 'react-icons/hi';
 
 const MONTHS = ['','Yanvar','Fevral','Mart','Aprel','May','Iyun','Iyul','Avgust','Sentabr','Oktabr','Noyabr','Dekabr'];
 
@@ -23,7 +24,7 @@ const SimpleBar = ({ data }) => {
 
 const StatCard = ({ icon, label, value, color }) => (
   <div className="card flex items-center gap-4">
-    <div className={`${color} p-3 rounded-xl flex-shrink-0`}>
+    <div className={`${color} p-3 rounded-xl flex-shrink-0 flex items-center justify-center`}>
       <span className="text-2xl text-white">{icon}</span>
     </div>
     <div>
@@ -58,10 +59,10 @@ export default function Dashboard() {
       </div>
 
       <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatCard icon="👥" label={t('total_employees')} value={data.total_employees} color="bg-indigo-500" />
-        <StatCard icon="✅" label={t('today_present')} value={data.today_present} color="bg-green-500" />
-        <StatCard icon="❌" label={t('today_absent')} value={data.today_absent} color="bg-red-500" />
-        <StatCard icon="💰" label={t('monthly_salary')} value={`${fmt(data.monthly_salary_total)} so'm`} color="bg-purple-500" />
+        <StatCard icon={<HiUsers className="w-6 h-6" />} label={t('total_employees')} value={data.total_employees} color="bg-indigo-500" />
+        <StatCard icon={<HiCheckCircle className="w-6 h-6" />} label={t('today_present')} value={data.today_present} color="bg-green-500" />
+        <StatCard icon={<HiXCircle className="w-6 h-6" />} label={t('today_absent')} value={data.today_absent} color="bg-red-500" />
+        <StatCard icon={<HiCurrencyDollar className="w-6 h-6" />} label={t('monthly_salary')} value={`${fmt(data.monthly_salary_total)} so'm`} color="bg-purple-500" />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">

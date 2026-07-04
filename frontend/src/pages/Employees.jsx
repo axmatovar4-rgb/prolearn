@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import api from '../api';
 import toast from 'react-hot-toast';
 import { useApp } from '../context/AppContext';
+import { HiLockClosed } from 'react-icons/hi2';
 
 export default function Employees() {
   const [employees, setEmployees] = useState([]);
@@ -63,7 +64,7 @@ export default function Employees() {
         </div>
         <div className="flex gap-2">
           <Link to="/app/blocked" className="btn-secondary flex items-center gap-2 text-red-500">
-            🔒 Bloklangan
+            <HiLockClosed className="w-4 h-4" /> Bloklangan
           </Link>
           <Link to="/app/employees/new" className="btn-primary flex items-center gap-2">
             <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" /></svg>

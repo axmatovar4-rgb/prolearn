@@ -2,46 +2,62 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  color-scheme: light;
+}
+
 body {
-  font-family: 'Segoe UI', sans-serif;
-  @apply bg-slate-100 dark:bg-slate-900 transition-colors duration-200;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  @apply min-h-screen bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-200;
+}
+
+#root {
+  @apply min-h-screen;
+}
+
+* {
+  @apply box-border;
+}
+
+::selection {
+  @apply bg-cyan-500/20 text-slate-900;
 }
 
 .sidebar-link {
-  @apply flex items-center gap-3 px-4 py-3 rounded-lg text-white/60 hover:bg-white/10 hover:text-white transition-all duration-200;
+  @apply flex items-center gap-3 px-4 py-3 rounded-xl text-white/70 hover:bg-white/10 hover:text-white transition-all duration-200;
 }
 .sidebar-link.active {
-  @apply bg-white/20 text-white;
+  @apply bg-white/15 text-white shadow-lg shadow-cyan-950/30;
 }
 
 .card {
-  @apply bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700 p-6 transition-colors;
+  @apply bg-white dark:bg-slate-800 rounded-2xl shadow-[0_10px_30px_rgba(15,23,42,0.06)] border border-slate-200/70 dark:border-slate-700 p-6 transition-all;
 }
 
 .btn-primary {
-  @apply bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg font-medium transition-colors;
+  @apply bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white px-4 py-2 rounded-xl font-medium shadow-lg shadow-cyan-600/20 transition-all;
 }
 .btn-secondary {
-  @apply bg-slate-100 hover:bg-slate-200 dark:bg-slate-700 dark:hover:bg-slate-600 dark:text-slate-200 text-slate-700 px-4 py-2 rounded-lg font-medium transition-colors;
+  @apply bg-slate-100 hover:bg-slate-200 dark:bg-slate-700 dark:hover:bg-slate-600 dark:text-slate-200 text-slate-700 px-4 py-2 rounded-xl font-medium transition-colors;
 }
 .btn-danger {
-  @apply bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-medium transition-colors;
+  @apply bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-xl font-medium transition-colors;
 }
 .btn-success {
-  @apply bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg font-medium transition-colors;
+  @apply bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-xl font-medium transition-colors;
 }
 
 .input {
-  @apply w-full border border-slate-200 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 dark:placeholder-slate-400 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors;
+  @apply w-full border border-slate-200 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 dark:placeholder-slate-400 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all;
 }
 .label {
-  @apply block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1;
+  @apply block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5;
 }
 
-.badge-present { @apply bg-green-100 text-green-700 px-2 py-0.5 rounded-full text-xs font-medium; }
-.badge-absent  { @apply bg-red-100 text-red-700 px-2 py-0.5 rounded-full text-xs font-medium; }
-.badge-half    { @apply bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded-full text-xs font-medium; }
+.badge-present { @apply bg-emerald-100 text-emerald-700 px-2.5 py-1 rounded-full text-xs font-semibold; }
+.badge-absent  { @apply bg-rose-100 text-rose-700 px-2.5 py-1 rounded-full text-xs font-semibold; }
+.badge-half    { @apply bg-amber-100 text-amber-700 px-2.5 py-1 rounded-full text-xs font-semibold; }
 
 /* Dark mode overrides */
-.dark .card { background-color: #1e293b; border-color: #334155; }
-.dark body { background-color: #0f172a; }
+.dark .card { background-color: #111827; border-color: #334155; }
+.dark body { background-color: #020617; }

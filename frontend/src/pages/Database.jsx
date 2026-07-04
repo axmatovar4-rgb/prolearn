@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react';
 import api from '../api';
 import toast from 'react-hot-toast';
+import { HiUsers, HiCalendarDays, HiCurrencyDollar, HiSparkles, HiDocumentText, HiBell } from 'react-icons/hi2';
 
 const TABLES = {
-  employees:     { label: 'Ishchilar', icon: '👥', color: 'bg-blue-50 text-blue-700 border-blue-100' },
-  attendance:    { label: 'Davomat',   icon: '📅', color: 'bg-green-50 text-green-700 border-green-100' },
-  salary:        { label: 'Maosh',     icon: '💰', color: 'bg-purple-50 text-purple-700 border-purple-100' },
-  vacations:     { label: "Ta'til",    icon: '🏖️', color: 'bg-amber-50 text-amber-700 border-amber-100' },
-  requests:      { label: "So'rovlar", icon: '📝', color: 'bg-rose-50 text-rose-700 border-rose-100' },
-  notifications: { label: 'Bildirishnomalar', icon: '🔔', color: 'bg-slate-50 text-slate-700 border-slate-100' },
+  employees:     { label: 'Ishchilar', icon: '👥', color: 'bg-blue-50 text-blue-700 border-blue-100', Icon: HiUsers },
+  attendance:    { label: 'Davomat',   icon: '📅', color: 'bg-green-50 text-green-700 border-green-100', Icon: HiCalendarDays },
+  salary:        { label: 'Maosh',     icon: '💰', color: 'bg-purple-50 text-purple-700 border-purple-100', Icon: HiCurrencyDollar },
+  vacations:     { label: "Ta'til",    icon: '🏖️', color: 'bg-amber-50 text-amber-700 border-amber-100', Icon: HiSparkles },
+  requests:      { label: "So'rovlar", icon: '📝', color: 'bg-rose-50 text-rose-700 border-rose-100', Icon: HiDocumentText },
+  notifications: { label: 'Bildirishnomalar', icon: '🔔', color: 'bg-slate-50 text-slate-700 border-slate-100', Icon: HiBell },
 };
 
 export default function Database() {
@@ -108,7 +109,7 @@ export default function Database() {
           {Object.entries(TABLES).map(([key, val]) => (
             <button key={key} onClick={() => { setActiveTable(key); setPage(0); setSqlMode(false); }}
               className={`rounded-xl border p-3 text-left transition-all hover:shadow-md ${val.color} ${activeTable === key ? 'ring-2 ring-indigo-400 shadow-md' : ''}`}>
-              <div className="text-2xl mb-1">{val.icon}</div>
+              <div className="text-2xl mb-1">{val.Icon ? <val.Icon className="w-6 h-6" /> : val.icon}</div>
               <div className="text-lg font-bold">{stats.tables[key] || 0}</div>
               <div className="text-xs opacity-70">{val.label}</div>
             </button>

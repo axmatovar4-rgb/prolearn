@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../api';
 import toast from 'react-hot-toast';
+import { HiLockClosed, HiTrash, HiLockOpen } from 'react-icons/hi2';
 
 export default function BlockedEmployees() {
   const [list, setList] = useState([]);
@@ -51,7 +52,7 @@ export default function BlockedEmployees() {
         </div>
       ) : list.length === 0 ? (
         <div className="card text-center py-16">
-          <div className="text-5xl mb-3">🔓</div>
+          <div className="text-5xl mb-3"><HiLockOpen className="w-12 h-12 text-slate-300 mx-auto" /></div>
           <p className="text-slate-500">Bloklangan ishchilar yo'q</p>
         </div>
       ) : (
@@ -76,7 +77,7 @@ export default function BlockedEmployees() {
                       </div>
                       <div>
                         <p className="font-medium text-slate-800">{emp.last_name} {emp.first_name}</p>
-                        <p className="text-xs text-red-400">🔒 Bloklangan</p>
+                        <p className="text-xs text-red-400 flex items-center gap-1"><HiLockClosed className="w-3 h-3" /> Bloklangan</p>
                       </div>
                     </div>
                   </td>
@@ -87,11 +88,11 @@ export default function BlockedEmployees() {
                     <div className="flex items-center justify-end gap-2">
                       <button onClick={() => unblock(emp.id, `${emp.first_name} ${emp.last_name}`)}
                         className="px-3 py-1.5 bg-green-100 hover:bg-green-200 text-green-700 rounded-lg text-xs font-medium transition-colors flex items-center gap-1">
-                        🔓 Blokdan chiqarish
+                        <HiLockOpen className="w-3 h-3" /> Blokdan chiqarish
                       </button>
                       <button onClick={() => deleteEmp(emp.id, `${emp.first_name} ${emp.last_name}`)}
                         className="px-3 py-1.5 bg-red-100 hover:bg-red-200 text-red-600 rounded-lg text-xs font-medium transition-colors flex items-center gap-1">
-                        🗑️ O'chirish
+                        <HiTrash className="w-3 h-3" /> O'chirish
                       </button>
                     </div>
                   </td>

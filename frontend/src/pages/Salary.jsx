@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import api from '../api';
 import toast from 'react-hot-toast';
+import { HiCreditCard, HiCheck } from 'react-icons/hi2';
 
 const MONTHS = ['Yanvar','Fevral','Mart','Aprel','May','Iyun','Iyul','Avgust','Sentabr','Oktabr','Noyabr','Dekabr'];
 const fmt = n => new Intl.NumberFormat('uz-UZ').format(Math.round(n || 0));
@@ -198,7 +199,7 @@ function PayModal({ item, onClose, onPaid }) {
         <div className="p-5 space-y-4">
           {done ? (
             <div className="text-center py-6">
-              <div className="text-5xl mb-3">{method === 'cash' ? '💵' : '💳'}</div>
+              <div className="text-5xl mb-3 flex justify-center">{method === 'cash' ? <svg className="w-12 h-12" fill="#10b981" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg> : <HiCreditCard className="w-12 h-12 text-indigo-600" />}</div>
               <h3 className="text-xl font-bold text-slate-800 mb-1">To'lov amalga oshirildi!</h3>
               <p className="text-2xl font-bold text-green-600 mt-2">{fmt(item.total_amount)} so'm</p>
               <p className="text-slate-500 text-sm mt-1">{method === 'cash' ? 'Naqd pul berildi' : 'Kartaga o\'tkazildi'}</p>
@@ -247,12 +248,12 @@ function PayModal({ item, onClose, onPaid }) {
                 <div className="grid grid-cols-2 gap-3">
                   <button onClick={() => setMethod('transfer')}
                     className={`py-3 rounded-xl border-2 font-medium text-sm transition-all flex flex-col items-center gap-1 ${method==='transfer'?'border-indigo-500 bg-indigo-50 text-indigo-600':'border-slate-200 text-slate-500 hover:border-slate-300'}`}>
-                    <span className="text-2xl">💳</span>
+                    <HiCreditCard className="w-5 h-5" />
                     O'tkazma
                   </button>
                   <button onClick={() => setMethod('cash')}
                     className={`py-3 rounded-xl border-2 font-medium text-sm transition-all flex flex-col items-center gap-1 ${method==='cash'?'border-green-500 bg-green-50 text-green-600':'border-slate-200 text-slate-500 hover:border-slate-300'}`}>
-                    <span className="text-2xl">💵</span>
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
                     Naqd
                   </button>
                 </div>
@@ -280,7 +281,7 @@ function PayModal({ item, onClose, onPaid }) {
               {method === 'cash' && (
                 <div className="bg-green-50 rounded-xl p-4 border border-green-100">
                   <div className="flex items-center gap-3">
-                    <span className="text-3xl">💵</span>
+                    <svg className="w-8 h-8" fill="#059669" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
                     <div>
                       <p className="font-semibold text-green-700">{fmt(item.total_amount)} so'm naqd beriladi</p>
                       <p className="text-sm text-green-600">{item.last_name} {item.first_name} ga qo'lma-qo'l</p>
@@ -293,8 +294,8 @@ function PayModal({ item, onClose, onPaid }) {
               <button onClick={handlePay} disabled={paying}
                 className={`w-full py-3 rounded-xl font-bold text-base transition-all shadow-md flex items-center justify-center gap-2 text-white ${method==='cash'?'bg-gradient-to-r from-green-500 to-emerald-600':'bg-gradient-to-r from-indigo-500 to-purple-600'}`}>
                 {paying ? 'Amalga oshirilmoqda...' : method === 'cash'
-                  ? `💵 ${fmt(item.total_amount)} so'm naqd to'landi`
-                  : `💳 ${fmt(item.total_amount)} so'm o'tkazish`}
+                  ? `${fmt(item.total_amount)} so'm naqd to'landi`
+                  : `${fmt(item.total_amount)} so'm o'tkazish`}
               </button>
             </>
           )}

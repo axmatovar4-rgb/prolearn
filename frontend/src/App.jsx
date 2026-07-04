@@ -32,6 +32,9 @@ export default function App() {
     <BrowserRouter>
       <Toaster position="top-right" />
       <Routes>
+        {/* Compatibility redirects for direct URLs */}
+        <Route path="/employees" element={<Navigate to="/app/employees" replace />} />
+        <Route path="/employees/*" element={<Navigate to="/app/employees" replace />} />
         <Route path="/" element={<Splash />} />
         <Route path="/login" element={<Login />} />
         <Route path="/app" element={<PrivateRoute><Layout /></PrivateRoute>}>

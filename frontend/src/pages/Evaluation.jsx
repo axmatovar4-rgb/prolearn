@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import api from '../api';
 import toast from 'react-hot-toast';
+import { HiStar, HiTrophy, HiGift, HiExclamationTriangle } from 'react-icons/hi2';
 
 const MONTHS = ['','Yanvar','Fevral','Mart','Aprel','May','Iyun','Iyul','Avgust','Sentabr','Oktabr','Noyabr','Dekabr'];
 const fmt = n => new Intl.NumberFormat('uz-UZ').format(Math.round(n || 0));
@@ -93,9 +94,13 @@ export default function Evaluation() {
 
       {/* Tablar */}
       <div className="flex gap-1 bg-slate-100 dark:bg-slate-800 rounded-xl p-1">
-        {[['evaluations','⭐ Baholash'],['top','🏆 Reyting'],['bonuses','🎉 Bonuslar'],['penalties','⚠️ Jarimalar']].map(([v,l]) => (
+        {[['evaluations','Baholash'],['top','Reyting'],['bonuses','Bonuslar'],['penalties','Jarimalar']].map(([v,l]) => (
           <button key={v} onClick={() => setTab(v)}
-            className={`flex-1 py-2 rounded-lg text-sm font-medium transition-colors ${tab===v?'bg-white dark:bg-slate-700 shadow text-indigo-600':'text-slate-500 hover:text-slate-700'}`}>
+            className={`flex-1 py-2 rounded-lg text-sm font-medium transition-colors flex items-center justify-center gap-1 ${tab===v?'bg-white dark:bg-slate-700 shadow text-indigo-600':'text-slate-500 hover:text-slate-700'}`}>
+            {v === 'evaluations' && <HiStar className="w-4 h-4" />}
+            {v === 'top' && <HiTrophy className="w-4 h-4" />}
+            {v === 'bonuses' && <HiGift className="w-4 h-4" />}
+            {v === 'penalties' && <HiExclamationTriangle className="w-4 h-4" />}
             {l}
           </button>
         ))}
@@ -201,7 +206,7 @@ export default function Evaluation() {
       {tab === 'bonuses' && (
         <div className="space-y-4">
           <form onSubmit={addBonus} className="card border-2 border-green-100 space-y-3">
-            <h3 className="font-semibold text-slate-700 dark:text-white">🎉 Bonus qo'shish</h3>
+            <h3 className="font-semibold text-slate-700 dark:text-white flex items-center gap-2"><HiGift className="w-5 h-5 text-green-600" /> Bonus qo'shish</h3>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <div>
                 <label className="label">Xodim</label>

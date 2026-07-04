@@ -42,11 +42,18 @@ router.get('/:id', auth, async (req, res) => {
 // Qo'shish
 router.post('/', auth, upload.single('photo'), async (req, res) => {
   try {
-    const { first_name, last_name, middle_name, phone, email, address, city, position, department, hire_date, salary_type, base_salary } = req.body;
+    const { first_name, last_name, middle_name, phone, email, address, city, position, department, hire_date, salary_type, base_salary, password } = req.body;
     const photo = req.file ? `/uploads/${req.file.filename}` : null;
+
+    let password_hash = null;
+    if (password && password.length >= 4) {
+      const bcrypt = require('bcryptjs');
+      password_hash = bcrypt.hashSync(password, 10);
+    }
+
     const result = await db.run_p(
-      `INSERT INTO employees (first_name, last_name, middle_name, phone, email, address, city, position, department, hire_date, salary_type, base_salary, photo) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)`,
-      [first_name, last_name, middle_name, phone, email, address, city, position, department, hire_date, salary_type, base_salary, photo]
+      `INSERT INTO employees (first_name, last_name, middle_name, phone, email, address, city, position, department, hire_date, salary_type, base_salary, photo, password_hash) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+      [first_name, last_name, middle_name, phone, email, address, city, position, department, hire_date, salary_type, base_salary, photo, password_hash]
     );
     res.json({ id: result.lastID, message: 'Ishchi qo\'shildi' });
   } catch (err) { res.status(500).json({ error: err.message }); }

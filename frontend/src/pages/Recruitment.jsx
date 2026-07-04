@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import api from '../api';
 import toast from 'react-hot-toast';
+import { HiExclamationTriangle, HiDocumentText, HiClock, HiArrowDownTray } from 'react-icons/hi2';
 
 const DOC_TYPES = ['Pasport', 'Diplom', 'Mehnat daftarchasi', 'Shartnoma', 'Tibbiy ko\'rik', 'Boshqa'];
 
@@ -78,7 +79,7 @@ export default function Recruitment() {
       {/* Muddati tugayotgan hujjatlar */}
       {expiring.length > 0 && (
         <div className="bg-amber-50 border border-amber-200 rounded-xl p-4">
-          <h3 className="font-semibold text-amber-700 mb-2">⚠️ 30 kunda muddati tugaydigan hujjatlar</h3>
+          <h3 className="font-semibold text-amber-700 mb-2 flex items-center gap-2"><HiExclamationTriangle className="w-5 h-5" /> 30 kunda muddati tugaydigan hujjatlar</h3>
           <div className="space-y-1">
             {expiring.map(d => (
               <div key={d.id} className="flex items-center justify-between text-sm">
@@ -102,9 +103,11 @@ export default function Recruitment() {
         <>
           {/* Tablar */}
           <div className="flex gap-2 border-b border-slate-200 dark:border-slate-700">
-            {[['docs', '📄 Hujjatlar'], ['probation', '⏱️ Sinov muddati']].map(([v, l]) => (
+            {[['docs', 'Hujjatlar'], ['probation', 'Sinov muddati']].map(([v, l]) => (
               <button key={v} onClick={() => setTab(v)}
-                className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${tab === v ? 'border-indigo-500 text-indigo-600' : 'border-transparent text-slate-500 hover:text-slate-700'}`}>
+                className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors flex items-center gap-1 ${tab === v ? 'border-indigo-500 text-indigo-600' : 'border-transparent text-slate-500 hover:text-slate-700'}`}>
+                {v === 'docs' && <HiDocumentText className="w-4 h-4" />}
+                {v === 'probation' && <HiClock className="w-4 h-4" />}
                 {l}
               </button>
             ))}
@@ -157,7 +160,7 @@ export default function Recruitment() {
                 ) : docs.map(d => (
                   <div key={d.id} className="card flex items-center justify-between gap-3 py-3">
                     <div className="flex items-center gap-3">
-                      <div className="bg-indigo-100 p-2 rounded-lg text-xl">📄</div>
+                      <div className="bg-indigo-100 p-2 rounded-lg"><HiDocumentText className="w-5 h-5 text-indigo-600" /></div>
                       <div>
                         <p className="font-medium text-slate-800 dark:text-white">{d.name}</p>
                         <p className="text-xs text-slate-500">{d.type} {d.expiry_date && `· Muddati: ${d.expiry_date}`}</p>
@@ -167,8 +170,8 @@ export default function Recruitment() {
                     <div className="flex gap-2">
                       {d.file_path && (
                         <a href={d.file_path} target="_blank" rel="noreferrer"
-                          className="px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg text-xs hover:bg-blue-100 transition-colors">
-                          📥 Yuklab olish
+                          className="px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg text-xs hover:bg-blue-100 transition-colors flex items-center gap-1">
+                          <HiArrowDownTray className="w-3 h-3" /> Yuklab olish
                         </a>
                       )}
                       <button onClick={() => deleteDoc(d.id)}

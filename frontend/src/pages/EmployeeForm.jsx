@@ -15,7 +15,8 @@ export default function EmployeeForm() {
     first_name: '', last_name: '', middle_name: '',
     phone: '', email: '', address: '', city: '',
     position: '', department: '', hire_date: '',
-    salary_type: 'monthly', base_salary: '', status: 'active'
+    salary_type: 'monthly', base_salary: '', status: 'active',
+    login: '', password: ''
   });
   const [photo, setPhoto] = useState(null);
   const [preview, setPreview] = useState(null);
@@ -185,6 +186,27 @@ export default function EmployeeForm() {
                 value={form.base_salary}
                 onChange={e => set('base_salary', e.target.value)}
               />
+            </div>
+          </div>
+        </div>
+
+        {/* Login va Parol */}
+        <div className="card">
+          <h2 className="font-semibold text-slate-700 mb-4">Kirish ma'lumotlari</h2>
+          <p className="text-xs text-slate-400 mb-3">Xodim saytga shu login va parol bilan kiradi</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label className="label">Login (telefon yoki ism)</label>
+              <input className="input" placeholder="+998901234567 yoki Karimov Jasur"
+                value={form.login || form.phone || ''}
+                onChange={e => set('login', e.target.value)} />
+            </div>
+            <div>
+              <label className="label">{isEdit ? 'Yangi parol (o\'zgartirish uchun)' : 'Parol *'}</label>
+              <input type="password" className="input" placeholder="Kamida 4 ta belgi"
+                value={form.password || ''}
+                onChange={e => set('password', e.target.value)}
+                required={!isEdit} />
             </div>
           </div>
         </div>

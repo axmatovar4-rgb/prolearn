@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react';
 import api from '../api';
 import toast from 'react-hot-toast';
+import { HiCalendarDays, HiSparkles, HiMoon, HiExclamationTriangle } from 'react-icons/hi2';
 
 const getUser = () => { try { return JSON.parse(localStorage.getItem('user')); } catch { return null; } };
 
 const TYPES = {
-  leave: '🏖️ Ta\'tilga chiqish',
-  sick: '🤒 Kasallik',
-  permission: '🚪 Ruxsat (qisqa)',
-  other: '📝 Boshqa'
+  leave: 'Ta\'tilga chiqish',
+  sick: 'Kasallik',
+  permission: 'Ruxsat (qisqa)',
+  other: 'Boshqa'
 };
 
 const STATUS = {
@@ -139,7 +140,10 @@ export default function Requests() {
         <span className="text-xs text-slate-400 self-center">Tur:</span>
         {[['', 'Hammasi'], ['leave', "Ta'til"], ['sick', 'Kasallik'], ['permission', 'Ruxsat'], ['other', 'Boshqa']].map(([v, l]) => (
           <button key={v} onClick={() => setTypeFilter(v)}
-            className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${typeFilter === v ? 'bg-purple-600 text-white' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'}`}>
+            className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors flex items-center gap-1 ${typeFilter === v ? 'bg-purple-600 text-white' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'}`}>
+            {v === 'leave' && <HiSparkles className="w-3 h-3" />}
+            {v === 'sick' && <HiMoon className="w-3 h-3" />}
+            {v === 'permission' && <HiExclamationTriangle className="w-3 h-3" />}
             {l}
           </button>
         ))}
@@ -172,7 +176,7 @@ export default function Requests() {
                 <h3 className="font-semibold text-slate-800">{r.title}</h3>
                 {r.description && <p className="text-slate-500 text-sm mt-1">{r.description}</p>}
                 <div className="flex gap-4 mt-2 text-xs text-slate-400">
-                  {r.start_date && <span>📅 {r.start_date.replace('T', ' ')}</span>}
+                  {r.start_date && <span className="flex items-center gap-1"><HiCalendarDays className="w-3 h-3" /> {r.start_date.replace('T', ' ')}</span>}
                   {r.end_date && <span>→ {r.end_date.replace('T', ' ')}</span>}
                   <span>Yuborilgan: {new Date(r.created_at).toLocaleString('uz-UZ')}</span>
                 </div>

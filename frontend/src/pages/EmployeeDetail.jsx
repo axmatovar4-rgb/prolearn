@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import api from '../api';
-import { HiArrowLeft, HiPencil, HiPhone, HiMail, HiLocationMarker, HiCalendar, HiUser } from 'react-icons/hi';
+import { HiArrowLeft, HiPencil, HiPhone, HiMail, HiLocationMarker, HiCalendar, HiUser, HiCheckCircle, HiXCircle, HiClock, HiFolder, HiCurrencyDollar } from 'react-icons/hi';
 
 const SimpleBar = ({ data }) => {
   if (!data || data.length === 0) return null;
@@ -82,9 +82,9 @@ export default function EmployeeDetail() {
           {emp.email && <div className="flex items-center gap-2 text-slate-600"><HiMail className="text-slate-400" /> {emp.email}</div>}
           {emp.city && <div className="flex items-center gap-2 text-slate-600"><HiLocationMarker className="text-slate-400" /> {emp.city}{emp.address ? `, ${emp.address}` : ''}</div>}
           {emp.hire_date && <div className="flex items-center gap-2 text-slate-600"><HiCalendar className="text-slate-400" /> Ish boshlagan: {emp.hire_date}</div>}
-          {emp.department && <div className="flex items-center gap-2 text-slate-600"><span className="text-slate-400">📁</span> Bo'lim: {emp.department}</div>}
+          {emp.department && <div className="flex items-center gap-2 text-slate-600"><HiFolder className="text-slate-400" /> Bo'lim: {emp.department}</div>}
           <div className="flex items-center gap-2 text-slate-600">
-            <span className="text-slate-400">💰</span>
+            <HiCurrencyDollar className="text-slate-400" />
             {emp.salary_type === 'monthly' ? `Oylik: ${fmt(emp.base_salary)} so'm` : `Soatbay: ${fmt(emp.base_salary)} so'm`}
           </div>
         </div>
@@ -137,8 +137,11 @@ export default function EmployeeDetail() {
                 <tr key={a.id} className="hover:bg-slate-50">
                   <td className="px-5 py-3 text-slate-700">{a.date}</td>
                   <td className="px-5 py-3">
-                    <span className={a.status === 'present' ? 'badge-present' : a.status === 'absent' ? 'badge-absent' : 'badge-half'}>
-                      {a.status === 'present' ? 'Keldi' : a.status === 'absent' ? 'Kelmadi' : 'Yarim kun'}
+                    <span className={a.status === 'present' ? 'badge-present flex items-center gap-2' : a.status === 'absent' ? 'badge-absent flex items-center gap-2' : 'badge-half flex items-center gap-2'}>
+                      {a.status === 'present' && <HiCheckCircle className="w-4 h-4 text-emerald-700" />}
+                      {a.status === 'absent' && <HiXCircle className="w-4 h-4 text-rose-700" />}
+                      {a.status !== 'present' && a.status !== 'absent' && <HiClock className="w-4 h-4 text-amber-700" />}
+                      <span className="sr-only">{a.status}</span>
                     </span>
                   </td>
                   <td className="px-5 py-3 text-slate-600">{a.check_in || '—'}</td>
