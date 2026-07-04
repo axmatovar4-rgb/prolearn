@@ -4,7 +4,7 @@ import api from '../api';
 import toast from 'react-hot-toast';
 
 export default function Login() {
-  const [form, setForm] = useState({ username: '', password: '', birth_date: '', card_number: '' });
+  const [form, setForm] = useState({ username: '', password: '', birth_date: '' });
   const [showPass, setShowPass] = useState(false);
   const [loading, setLoading] = useState(false);
   const [isEmployee, setIsEmployee] = useState(false);
@@ -88,17 +88,7 @@ export default function Login() {
                 <input type="date" className="input"
                   value={form.birth_date} onChange={e => set('birth_date', e.target.value)} required={isEmployee} />
               </div>
-              <div>
-                <label className="label">Karta raqam</label>
-                <input className="input" placeholder="8600 1234 5678 9012"
-                  maxLength={19}
-                  value={form.card_number}
-                  onChange={e => {
-                    const val = e.target.value.replace(/\D/g, '').slice(0, 16);
-                    set('card_number', val.replace(/(\d{4})/g, '$1 ').trim());
-                  }} required={isEmployee} />
-              </div>
-            </>
+</>
           )}
 
           <button type="submit" disabled={loading}
